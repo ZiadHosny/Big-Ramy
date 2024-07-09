@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Ebooks from "./Pages/Ebooks/Ebooks";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import EbookDetails from "./Pages/EbookDetails/EbookDetails";
+import Root from "./Pages/Root/Root";
+import { Home } from "./Pages/Home/Home";
+import Login from "./Pages/Login/Login";
+
+function routers() {
+  const routers = createBrowserRouter([
+    {
+      path: "",
+      element: <Root />,
+      children: [
+        {
+          index: true,
+          element: <Home />,
+        },
+        {
+          path: '/login',
+          element: <Login />,
+        },
+        {
+          path: '/Ebook',
+          element: <Ebooks />,
+        },
+        { path: "/Ebook/:id", element: <EbookDetails /> },
+      ],
+    }
+  ]);
+  return routers;
+}
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return <RouterProvider router={routers()} />;
 }
 
 export default App;
